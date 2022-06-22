@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:async';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Gamepage extends StatefulWidget{
     const Gamepage({Key? key}) : super(key: key);
@@ -35,6 +36,7 @@ class _Gamepage extends State<Gamepage>{
             ),
         );
     }
+
     void startTimer(){
         const oneSec = const Duration(seconds: 1);
         _timer = new Timer.periodic(
@@ -42,6 +44,7 @@ class _Gamepage extends State<Gamepage>{
             (Timer timer) => setState(
                 (){
                     if(_startCountdown == 1){
+                        changeLocation();
                         currentCircle = circle();
                         gameTimer();
                     }
@@ -68,10 +71,10 @@ class _Gamepage extends State<Gamepage>{
                 });
             },
             child: Container(
-                width: 50,
-                height: 50,
+                width: 60,
+                height: 60,
                 decoration: BoxDecoration(
-                    color: Colors.orange,
+                    color: Color(0xff9332CA),
                     shape: BoxShape.circle,
                 ),
             ),
@@ -99,38 +102,52 @@ class _Gamepage extends State<Gamepage>{
                         (_startCountdown != 0)?
                             Center(
                                 child: Container(
-                                    color: Colors.red,
+                                    decoration: BoxDecoration(
+                                        color: Color(0xffECE6FF),
+                                        borderRadius: BorderRadius.all(Radius.circular(10)),    
+                                    ),
                                     padding: EdgeInsets.all(30),
                                     child: FittedBox(
                                         fit: BoxFit.fill,
-                                        child: Column(
-                                            children: [
-                                                Text('Game starts in: '),
-                                                Text('${_startCountdown}'),
-                                            ],
+                                        child: Align(
+                                            alignment: Alignment.center,
+                                            child: Column(
+                                                children: [
+                                                    Text(
+                                                        'Game starts in:',
+                                                        style: Theme.of(context).textTheme.bodyText1,
+                                                    ),
+                                                    SizedBox(height: 10),
+                                                    Text(
+                                                        '${_startCountdown}',
+                                                        style: Theme.of(context).textTheme.bodyText1,
+                                                    ),
+                                                ],
+                                            ),
                                         ),
                                     ),
                                 ),
                         ): Container(),
                         Column(
                             children: [
+                                SizedBox(height: 30),
                                 Row(
                                     children: [
                                         Expanded(
-                                            child: Padding(
-                                                padding: EdgeInsets.all(10),
                                                 child: Center(
-                                                    child: Text('${_circleCounter}'),
+                                                    child: Text(
+                                                        '${_circleCounter}',
+                                                        style: Theme.of(context).textTheme.headline1,
+                                                    ),
                                                 ),
-                                            ),
                                         ),
                                         Expanded(
-                                            child: Padding(
-                                                padding: EdgeInsets.all(10),
                                                 child: Center(
-                                                    child: Text('${_countdown}s'),
+                                                    child: Text(
+                                                        '${_countdown}s',
+                                                        style: Theme.of(context).textTheme.headline1,
+                                                    ),
                                                 ),
-                                            ),
                                         ),
                                     ],
                                 ),

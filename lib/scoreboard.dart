@@ -15,8 +15,38 @@ class _ScoreboardpageState extends State<Scoreboardpage>{
     Widget build(BuildContext context){
         return Scaffold(
             body: Center(
-                child: Container(
-                    child: Text('You have collected ${widget.circleCounter} circles in ${widget.time} seconds'),
+                child: Column(
+                    children: [
+                        Text('Your score'),
+                        IntrinsicHeight(
+                            child: Row(
+                                children: [
+                                    Column(
+                                        children: [
+                                            Text(
+                                                '${widget.circleCounter}',
+                                                style: Theme.of(context).textTheme.headline1,
+                                            ),
+                                            Text('Circles'),
+                                        ]
+                                    ),
+                                    VerticalDivider(
+                                        color: Color(0xffD1C0FF),
+                                        thickness: 0.5
+                                    ),
+                                    Column(
+                                        children: [
+                                            Text(
+                                                '${widget.time}',
+                                                style: Theme.of(context).textTheme.headline1,
+                                            ),
+                                            Text('Time'),
+                                        ]
+                                    ),
+                                ]
+                            ),
+                        ),
+                    ],
                 ),
             ),
         );
