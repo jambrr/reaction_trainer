@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Scoreboardpage extends StatefulWidget{
     final int? circleCounter;
     final int? time;
+    final List<String>? scores;
 
-    Scoreboardpage(this.circleCounter, this.time);
+    Scoreboardpage(this.circleCounter, this.time, this.scores);
 
     @override
     _ScoreboardpageState createState() => _ScoreboardpageState();
 }
 
 class _ScoreboardpageState extends State<Scoreboardpage>{
+    List<String>? scores;
+
+    void initState(){
+        print(widget.scores);
+    }
+
+    void getScores() async{
+        
+    }
+
     @override
     Widget build(BuildContext context){
         return Scaffold(
@@ -46,6 +58,19 @@ class _ScoreboardpageState extends State<Scoreboardpage>{
                                 ]
                             ),
                         ),
+                        Container(
+                            child: ListView.builder(
+                                padding: const EdgeInsets.all(8),
+                                itemCount: widget.scores!.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                    return Container(
+                                        height: 50,
+                                        color: Colors.amber[100],
+                                        child: Center(child: Text('Entry ${widget.scores![index]}')),
+                                    );
+                                },
+                            ),
+                       ),
                     ],
                 ),
             ),

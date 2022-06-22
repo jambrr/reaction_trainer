@@ -20,15 +20,36 @@ class _Gamepage extends State<Gamepage>{
     double _yPosition = 0;
     Widget? currentCircle;
 
-    void gameTimer(){
+    void gameTimer() async{
+        final prefs = await SharedPreferences.getInstance();
         const oneSec = const Duration(seconds: 1);
+
         _timer = new Timer.periodic(
             oneSec,
             (Timer timer) => setState(
                 (){
                     if(_countdown < 1){
                         timer.cancel();
-                        Navigator.pushNamed(context, '/scoreboard', arguments:{'circleCounter': this._circleCounter, 'time': this._time});
+                        if(!(prefs.getStringList('scoreboard')!.isEmpty)){
+                            List<String>? list = prefs.getStringList('scoreboard');
+                            list!.add(_circleCounter.toString());
+                            
+                            //convert list to int list
+                            List<int> intList = list.map((e) => int.parse(e)).toList();
+
+                            //sort the list
+                            intList = intList.toSet().toList();
+                            intList.sort();
+                            
+                            //convert the list back to string list
+                            List<String> stringList = intList.map((e) => e.toString()).toList();
+                            
+                            //store the list
+                            prefs.setStringList('scoreboard', new List.from(stringList.reversed));
+                        }else{
+                            prefs.setStringList('scoreboard', <String>[_circleCounter.toString()]);
+                        }
+                        Navigator.pushNamed(context, '/scoreboard', arguments:{'circleCounter': this._circleCounter, 'time': this._time, 'scores': prefs.getStringList('scoreboard')});
                     }else{
                         _countdown = _countdown - 1;
                     }

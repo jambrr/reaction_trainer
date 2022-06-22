@@ -24,11 +24,11 @@ class MyApp extends StatelessWidget {
                     );
                 }
                 if(settings.name == '/scoreboard'){
-                    final args = settings.arguments as Map<String, int>;
+                    final args = settings.arguments as Map;
                     
                     return MaterialPageRoute(
                         builder: (context) {
-                            return Scoreboardpage(args['circleCounter'], args['time']);
+                            return Scoreboardpage(args['circleCounter'], args['time'], args['scores']);
                         },
                     );
                 }
