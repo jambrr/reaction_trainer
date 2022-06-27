@@ -30,7 +30,7 @@ class _Gamepage extends State<Gamepage>{
                 (){
                     if(_countdown < 1){
                         timer.cancel();
-                        if(!(prefs.getStringList('scoreboard')!.isEmpty)){
+                        if(prefs.getStringList('scoreboard') != null){
                             List<String>? list = prefs.getStringList('scoreboard');
                             list!.add(_circleCounter.toString());
                             
@@ -47,6 +47,7 @@ class _Gamepage extends State<Gamepage>{
                             //store the list
                             prefs.setStringList('scoreboard', new List.from(stringList.reversed));
                         }else{
+                            print('null');
                             prefs.setStringList('scoreboard', <String>[_circleCounter.toString()]);
                         }
                         Navigator.pushNamed(context, '/scoreboard', arguments:{'circleCounter': this._circleCounter, 'time': this._time, 'scores': prefs.getStringList('scoreboard')});

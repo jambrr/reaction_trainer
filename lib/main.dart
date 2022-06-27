@@ -38,6 +38,7 @@ class MyApp extends StatelessWidget {
                 textTheme: GoogleFonts.rubikTextTheme().copyWith(
                     headline1: GoogleFonts.rubik(fontSize: 32, fontWeight: FontWeight.w600),
                     headline2: GoogleFonts.rubik(fontSize: 32, fontWeight: FontWeight.w500),
+                    headline3: GoogleFonts.rubik(fontSize: 28, fontWeight: FontWeight.w400),
                     bodyText2: GoogleFonts.rubik(fontSize: 16, fontWeight: FontWeight.w400),
                     bodyText1: GoogleFonts.rubik(fontSize: 20, fontWeight: FontWeight.w500),
                 ).apply(
