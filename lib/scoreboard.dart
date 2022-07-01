@@ -70,43 +70,74 @@ class _ScoreboardpageState extends State<Scoreboardpage> {
               ),
             ),
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Container(
-                color: Colors.white,
-                child: Container(
-                  child: ListView.separated(
-                    padding: const EdgeInsets.all(8),
-                    itemCount:
-                        this.scores!.length < 3 ? this.scores!.length : 3,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Center(
-                        child: Container(
-                          width: 200,
-                          color: Colors.red,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  '${index + 1}.',
-                                  style: Theme.of(context).textTheme.headline2,
-                                ),
-                              ),
-                              Expanded(
-                                child: Text(
-                                  '${widget.scores![index]}',
-                                  style: Theme.of(context).textTheme.headline2,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const Divider(
-                      color: Color(0xffD1C0FF),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40)
                     ),
-                  ),
+                    color: Colors.white,
+                ),
+                child: Column(
+                    children: [
+                        Padding(
+                            padding: EdgeInsets.all(20),
+                            child: Text(
+                                'Scoreboard',
+                                style: Theme.of(context).textTheme.headline1,
+                            ),
+                        ),
+                        SizedBox(height: 20),
+                        Center(
+                            child: Container(
+                                            width: 250,
+                                            child: Row(
+                                              children: [
+                                                  Text(
+                                                    'Rank',
+                                                    style: Theme.of(context).textTheme.bodyText1,
+                                                  ),
+                                                  Spacer(),
+                                                  Text(
+                                                    'Circles',
+                                                    style: Theme.of(context).textTheme.bodyText1,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                        Expanded(
+                            child: ListView.separated(
+                                padding: EdgeInsets.symmetric(horizontal: 300, vertical: 20),
+                                itemCount: this.scores!.length < 3 ? this.scores!.length : 3,
+                                itemBuilder: (BuildContext context, int index) {
+                                    return Center(
+                                              child: Container(
+                                                width: 200,
+                                                child: Row(
+                                                  children: [
+                                                      Text(
+                                                        '${index + 1}.',
+                                                        style: Theme.of(context).textTheme.headline2,
+                                                      ),
+                                                      Spacer(),
+                                                      Text(
+                                                        '${widget.scores![index]}',
+                                                        style: Theme.of(context).textTheme.headline2,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            );
+                                },
+                                separatorBuilder: (BuildContext context, int index) =>
+                                    const Divider(
+                                  color: Color(0xffD1C0FF),
+                                ),
+                            ),
+                        ),
+                    ],
                 ),
               ),
             ),
