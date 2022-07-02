@@ -1,0 +1,4 @@
+#Sat Jul 02 18:06:39 CEST 2022
+base.0=/home/l4w/Dev/git/reaction_trainer/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
